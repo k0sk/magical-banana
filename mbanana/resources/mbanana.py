@@ -7,12 +7,19 @@ parser.add_argument('q', dest='query')
 class MBanana(Resource):
     def __init__(self, w2v):
         self.w2v = w2v
+        self.text = 'マジカルバナナやろうよ！'
 
     def get(self):
         args = parser.parse_args()
 
         if args['query'] in self.w2v:
             synonym = self.w2v.most_similar(args['query'])
-            return {'synonym': synonym[0][0]}
+            self.text = synonym[0][0]
+        else:
+            self.text = '君の勝ち！'
 
-        pass
+        return {
+            'username': 'Banana',
+            'text': self.text,
+            'icon_emoji': ':banana:'
+        }
