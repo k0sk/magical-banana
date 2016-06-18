@@ -8,8 +8,8 @@ class NEologd(db.Model):
     pron = db.Column(db.Text, index=True, nullable=False)
 
     def __repr__(self):
-        return '<NEologd id=%i word=%s pron=%s>' %
-        (self.id, self.word, self.pron)
+        return '<NEologd id=%i word=%s pron=%s>' % \
+            (self.id, self.word, self.pron)
 
     def init():
         db.create_all()
