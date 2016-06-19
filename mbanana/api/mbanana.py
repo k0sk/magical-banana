@@ -12,16 +12,18 @@ parser.add_argument('text')
 class MBanana(Resource):
     def __init__(self, w2v):
         self.w2v = w2v
+        self.username = 'Mr. Magical B.'
         self.text = ''
+        self.icon_emoji = ':banana:'
 
     def get(self):
         args = parser.parse_args()
         self._generate_response(args['query'])
 
         return {
-            'username': 'Banana',
+            'username': self.username,
             'text': self.text,
-            'icon_emoji': ':banana:'
+            'icon_emoji': self.icon_emoji
         }
 
     def post(self):
@@ -29,9 +31,9 @@ class MBanana(Resource):
         self._generate_response(args['text'])
 
         return {
-            'username': 'Banana',
+            'username': self.username,
             'text': self.text,
-            'icon_emoji': ':banana:'
+            'icon_emoji': self.icon_emoji
             }
 
     def _generate_response(self, query):
@@ -39,7 +41,6 @@ class MBanana(Resource):
         mat = re.search(pat, query)
 
         if mat is None:
-            self.text = 'マジカルバナナやろうよ！'
             nouns = self._extract_nouns(query)
         else:
             nouns = self._extract_nouns(query[mat.end():])
