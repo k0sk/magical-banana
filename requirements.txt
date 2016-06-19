@@ -1,7 +1,10 @@
+# Flask
 Flask
-flask-restful
+Flask-RESTful
 Flask-SQLAlchemy
 uWSGI
+
+# Application
 Cython
 gensim
 mecab-python3
