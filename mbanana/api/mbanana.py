@@ -57,7 +57,7 @@ class MBanana(Resource):
             self.text = '君の勝ち！'
 
     def _extract_nouns(self, query):
-        mt = MeCab.Tagger('-Ochasen')
+        mt = MeCab.Tagger('-Ochasen -d /usr/lib/mecab/dic/mecab-ipadic-neologd')
         res = mt.parse(query)
 
         pat = r'\t|-'
