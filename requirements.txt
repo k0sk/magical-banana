@@ -1,3 +1,7 @@
 Flask
 flask-restful
 Flask-SQLAlchemy
+uWSGI
+Cython
+gensim
+mecab-python3
