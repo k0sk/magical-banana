@@ -6,6 +6,7 @@ import MeCab
 
 parser = reqparse.RequestParser()
 parser.add_argument('q', dest='query')
+parser.add_argument('text')
 
 
 class MBanana(Resource):
@@ -22,6 +23,16 @@ class MBanana(Resource):
             'text': self.text,
             'icon_emoji': ':banana:'
         }
+
+    def post(self):
+        args = parser.parse_args()
+        self._generate_response(args['text'])
+
+        return {
+            'username': 'Banana',
+            'text': self.text,
+            'icon_emoji': ':banana:'
+            }
 
     def _generate_response(self, query):
         pat = r'といったら|と言ったら|といえば|と言えば'
