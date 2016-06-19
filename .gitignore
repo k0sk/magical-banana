@@ -1,2 +1,14 @@
+# Virtualenv
+mbanana/bin
+mbanana/include
+mbanana/lib
+mbanana/pip-selfcheck.json
+
+# W2V model
 w2v
+
+# SQLite databases
 databases
+
+# Environmental vars
+.envrc 
