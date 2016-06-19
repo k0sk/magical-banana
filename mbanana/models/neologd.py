@@ -15,6 +15,11 @@ class NEologd(db.Model):
         db.create_all()
 
     def import_entries():
+        """Imports entries from the NEologd dictionary.
+
+        Imports entries, specifically nouns and its pronounciation properties,
+        from the NEologd dictionary.
+        """
         import glob
 
         exclude_parts = frozenset(['組織', '記号', '代名詞'])

@@ -57,6 +57,12 @@ class MBanana(Resource):
             self.text = '君の勝ち！'
 
     def _extract_nouns(self, query):
+        """Extracts nouns from a given query based on Morphological Analysis.
+
+        Returns:
+            A dict mapping nouns to its pronounciation. Both nouns and
+            pronounciations are represented as string.
+        """
         mt = MeCab.Tagger('-Ochasen -d /usr/lib/mecab/dic/mecab-ipadic-neologd')
         res = mt.parse(query)
 
@@ -66,6 +72,11 @@ class MBanana(Resource):
         return {s[0]: s[1] for s in mat if '名詞' in s}
 
     def _get_synonyms(self, word):
+        """Get the three most similar words to a given word from the W2V model.
+
+        Returns:
+            A list of nouns. Each noun is represented as a string.
+        """
         if word in self.w2v:
             sims = self.w2v.most_similar(word, topn=3)
             return [s[0] for s in sims]
@@ -73,5 +84,10 @@ class MBanana(Resource):
         return []
 
     def _get_same_pron(self, word):
+        """Retrieves words that have the same pronounciation as a given word.
+
+        Returns:
+            A list of nouns.
+        """
         entries = NEologd.query.filter_by(pron=word)
         return [e.word for e in entries]
