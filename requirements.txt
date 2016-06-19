@@ -1,6 +1,7 @@
 # Flask
 Flask
 Flask-RESTful
+Flask-Cors
 Flask-SQLAlchemy
 uWSGI
 
