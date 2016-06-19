@@ -1,4 +1,5 @@
 from flask_restful import Resource, reqparse
+from mbanana.models.neologd import NEologd
 import re
 import random
 import MeCab
@@ -11,7 +12,6 @@ class MBanana(Resource):
     def __init__(self, w2v):
         self.w2v = w2v
         self.text = ''
-        self.ans_cand = []
 
     def get(self):
         args = parser.parse_args()
@@ -33,12 +33,14 @@ class MBanana(Resource):
         else:
             nouns = self._extract_nouns(query[mat.end():])
 
+        ans_cand = []
         if nouns:
-            picked = random.choice(nouns)
-            self._get_synonyms(picked)
+            picked = random.choice(list(nouns.keys()))
+            ans_cand += self._get_synonyms(picked)
+            ans_cand += self._get_same_pron(picked)
 
-        if self.ans_cand:
-            self.text += '%sといったら%s' % (picked, random.choice(self.ans_cand))
+        if ans_cand:
+            self.text += '%sといったら%s' % (picked, random.choice(ans_cand))
         else:
             self.text = '君の勝ち！'
 
@@ -49,9 +51,15 @@ class MBanana(Resource):
         pat = r'\t|-'
         mat = [re.split(pat, line) for line in res.splitlines()]
 
-        return [s[0] for s in mat if '名詞' in s]
+        return {s[0]: s[1] for s in mat if '名詞' in s}
 
     def _get_synonyms(self, word):
         if word in self.w2v:
             sims = self.w2v.most_similar(word, topn=3)
-            self.ans_cand += [s[0] for s in sims]
+            return [s[0] for s in sims]
+
+        return []
+
+    def _get_same_pron(self, word):
+        entries = NEologd.query.filter_by(pron=word)
+        return [e.word for e in entries]
