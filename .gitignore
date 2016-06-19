@@ -1,8 +1,7 @@
+__pycache__
+
 # Virtualenv
-mbanana/bin
-mbanana/include
-mbanana/lib
-mbanana/pip-selfcheck.json
+mbananaenv
 
 # W2V model
 w2v
@@ -11,4 +10,4 @@ w2v
 databases
 
 # Environmental vars
-.envrc 
+.envrc
