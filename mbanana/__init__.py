@@ -11,4 +11,4 @@ w2v = Word2Vec.load('mbanana/w2v/jawiki.model')
 
 from mbanana.api.mbanana import MBanana
 api = Api(app)
-api.add_resource(MBanana, '/api/mbanana/', resource_class_args=[w2v])
+api.add_resource(MBanana, '/api/', resource_class_args=[w2v])
