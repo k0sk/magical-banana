@@ -49,7 +49,7 @@ class MBanana(Resource):
         if nouns:
             picked = random.choice(list(nouns.keys()))
             ans_cand += self._get_synonyms(picked)
-            ans_cand += self._get_same_pron(picked)
+            ans_cand += self._get_same_pron(nouns[picked])
 
         if ans_cand:
             self.text += '%sといったら%s' % (picked, random.choice(ans_cand))
