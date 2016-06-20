@@ -1,5 +1,6 @@
 from flask_restful import Resource, reqparse
 from mbanana.models.neologd import NEologd
+from sqlalchemy import sql
 import re
 import random
 import MeCab
@@ -83,11 +84,13 @@ class MBanana(Resource):
 
         return []
 
-    def _get_same_pron(self, word):
+    def _get_same_pron(self, pron):
         """Retrieves words that have the same pronounciation as a given word.
 
         Returns:
             A list of nouns.
         """
-        entries = NEologd.query.filter_by(pron=word)
+        entries = NEologd.query.filter(
+            NEologd.pron.like('%%%s%%' % pron)
+            ).order_by(sql.func.random()).limit(3)
         return [e.word for e in entries]
