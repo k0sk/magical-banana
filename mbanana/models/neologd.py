@@ -30,8 +30,10 @@ class NEologd(db.Model):
                 for line in f:
                     entry = line.strip().split(',')
 
-                    if entry[3] not in imported_words:
-                        imported_words.add(entry[3])
+                    if entry[-3] not in imported_words and \
+                            len(entry[-3]) <= 10:
+                        imported_words.add(entry[-3])
+
                         if '名詞' in entry and \
                                 not exclude_parts.intersection(set(entry)):
                             db.session.add(NEologd(word=entry[-3],
