@@ -7,9 +7,11 @@ NEologdとWord2Vecを使った連想ゲーム『マジカルバナナ』のゲ�
 ただし，××は○○から連想したものでなければいけません
 
 ## さっそく遊ぶ
-下記のリンクから遊べます
+~~下記のリンクから遊べます~~
 
-- [Chat with Mr. Magical B.](http://k0sk.github.io/magical-banana-front/)
+*現在、サーバ停止中*
+
+- ~~[Chat with Mr. Magical B.](http://k0sk.github.io/magical-banana-front/)~~
 
 ## 仕組み
 このゲームボットは次のような方法で"連想"しています
