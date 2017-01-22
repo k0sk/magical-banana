@@ -1,6 +1,8 @@
 # :tophat: Magical Banana :banana:
 NEologdとWord2Vecを使った連想ゲーム『マジカルバナナ』のゲームボット
 
+![Chat with Mr. Magical B.](https://c1.staticflickr.com/1/499/32413066576_0cb33086b5.jpg)
+
 ## ルール
 「○○といったら××」という形式でプレイヤが順番に発言をします
 
